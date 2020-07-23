@@ -8,13 +8,14 @@ package linkedlist;
  * Class Node
  */
 public class Node<E> {
-	private E data;
-	private Node<E> next;
+	 E data;
+	 Node<E> next;
 
 	/**
 	 * Constructor
 	 */
-	public Node() {
+	public Node(E object) {
+		this(object, null);
 	}
 
 	/**
