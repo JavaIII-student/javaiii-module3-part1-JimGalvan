@@ -8,8 +8,8 @@ package linkedlist;
  * Class Node
  */
 public class Node<E> {
-	 E data;
-	 Node<E> next;
+	 private E data;
+	 private Node<E> next;
 
 	/**
 	 * Constructor
@@ -32,7 +32,7 @@ public class Node<E> {
 	 * @param node a reference to the node
 	 */
 	public void setNext(Node<E> node) {
-		next = node;
+		this.next = node;
 	}
 
 	/**
