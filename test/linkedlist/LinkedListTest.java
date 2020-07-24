@@ -88,9 +88,26 @@ public class LinkedListTest {
 
 	@Test
 	public void addTest() throws IndexOutOfBoundsException {
-		fail("Not yet implemented");		
-	}
+		LinkedList<Character> listCh = new LinkedList<>();
+		
+		listCh.addFirst('A');
+		listCh.addFirst('B');
+		listCh.addFirst('C');
+		listCh.addFirst('D');
+		
+		listCh.add('S', 1);
+		listCh.add('R', 2);	
 
+		listCh.print();
+		
+		Character S = 'S';
+		Character R = 'R';
+		
+		assertEquals(S, listCh.firstNode.getData());
+		assertEquals(R, listCh.firstNode.getNext().getData());
+		
+
+	}
 	@Test
 	public void removeTest() throws IndexOutOfBoundsException {
 		fail("Not yet implemented");
@@ -106,7 +123,7 @@ public class LinkedListTest {
 		list.addLast("Maria");
 		list.addLast("Will");
 	
-		list.print();
+//		list.print();
 		
 		
 	}
