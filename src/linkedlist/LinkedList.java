@@ -101,61 +101,32 @@ public class LinkedList<T> implements LinkedListInterface<T> {
 		// Variable to check index of the current node
 		int elementNum = 0;
 		Node<T> currentNode = firstNode;
-
+		// returnElement stores the element that will be deleted
+		Node<T> returnElement = null;
+		
 		while (currentNode != null) {
-			
 			elementNum++;
-			
-			if (index == 1 & elementNum == 1) {
-
-				firstNode.setNext(firstNode.getNext());
-
-				firstNode.setData(firstNode.getNext().getData());
+			// This removes first item in the list
+			if (index == 1) {
+				returnElement = new Node<T>(firstNode.getData());
+				firstNode = firstNode.getNext();
+				return returnElement.getData();
 			}
-			
-			
-			if (index == 1 & currentNode.getNext() != null) {
-				
-				currentNode.setNext(currentNode.getNext());
-				currentNode.setData(currentNode.getNext().getData());
+			// This removes last item in the list
+			if (currentNode.getNext().getNext() == null) {
+				returnElement = new Node<T>(lastNode.getData());
+				lastNode = currentNode;
+				currentNode.setNext(null);
+				return returnElement.getData();
 			}
-			
-			currentNode = currentNode.getNext();
-
-		}
-
-		
-		// This part of code moves the items when you insert an elements that is not at
-		// first node
-		
-//		if (elementNum == index -1) {
-//			
-//			currentNode.setNext(currentNode.getNext().getNext());
-//			currentNode.getNext().setData(currentNode.getNext().getData());
-//		}
-		
-		
-		// The following code deletes the last element in the list
-
-		currentNode = firstNode; // Set current node to first node
-		
-		// This part counts the number of elements in the list
-		int numOfElements = 0;
-
-		while (currentNode != null) {
-			numOfElements++;
+			// This removes any item between firstNode and lastNode
+			if (elementNum == index -1) {
+				returnElement = new Node<T>(currentNode.getNext().getData());
+				currentNode.setNext(currentNode.getNext().getNext());
+				return returnElement.getData();
+			}
 			currentNode = currentNode.getNext();
 		}
-
-		currentNode = firstNode;
-
-		for (int i = 0; i < numOfElements - 2; i++) {
-			currentNode = currentNode.getNext();
-		}
-		
-		currentNode.setNext(null);
-		lastNode.setNext(currentNode);
-
 		return null;
 	}
 

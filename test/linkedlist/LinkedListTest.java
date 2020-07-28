@@ -116,19 +116,25 @@ public class LinkedListTest {
 		listCh.addFirst('B');
 		listCh.addFirst('C');
 		listCh.addFirst('D');
-		listCh.addFirst('D');
-
-
-		listCh.remove(1);
-		listCh.remove(2);
 		
-		listCh.print();
+		listCh.remove(1);
+		listCh.remove(3);
 		
 		Character C = 'C';
-		Character A = 'A';
+		Character B = 'B';
 
 		assertEquals(C, listCh.firstNode.getData());
-		assertEquals(A, listCh.lastNode.getData());
+		assertEquals(B, listCh.lastNode.getData());
+		
+		listCh.addFirst('F');
+		listCh.addFirst('E');
+		listCh.addFirst('S');
+		
+		// Test return value
+		Character F = 'F';
+		assertEquals(F, listCh.remove(3));
+		
+		
 	}
 
 	@Test
