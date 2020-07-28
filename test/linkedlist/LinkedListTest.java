@@ -147,8 +147,6 @@ public class LinkedListTest {
 		list.addLast("Maria");
 		list.addLast("Will");
 
-//		list.print();
-
 	}
 
 }
