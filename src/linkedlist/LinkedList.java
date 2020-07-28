@@ -60,42 +60,73 @@ public class LinkedList<T> implements LinkedListInterface<T> {
 	@Override
 	public void add(T data, int index) throws IndexOutOfBoundsException {
 
-		// This is declared as -1 instead of 0 in order to follow list index convention
-		int elementNum = 0; // This equals to index 0
+		// Variable to check index of the current node
+		int elementNum = 0;
 
-		Node<T> currentNode = firstNode; // D
+		Node<T> currentNode = firstNode;
 
 		while (currentNode != null) {
 
 			elementNum++;
 
-//			if (elementNum == 1) {
-//				firstNode = new Node<T>(data, firstNode);
-//				return;
-//			}
-
-			 if (elementNum == index) {
-				
-//				System.out.println(currentNode.getData());
-				
-				currentNode = new Node<T>(data, currentNode);
-				currentNode.setData(data);
-				
-//				System.out.println(currentNode.getData());
-
-//				currentNode.setNext(new Node<T>(data, currentNode.getNext()));
-				
-//				return;
-
+			if (index == 1) {
+				firstNode = new Node<T>(data, firstNode);
+				return;
 			}
 
-			currentNode = currentNode.getNext(); // assign the reference to the following node, this case node 'B'
+			if (elementNum == index) {
+				currentNode.setNext(new Node<T>(data, currentNode.getNext()));
+				return;
+			}
+
+			// This allows to set a reference to the first node in the list after first
+			// iteration
+			if (elementNum > 1) {
+				currentNode = currentNode.getNext();
+			}
+
+			// Custom exception if an inputed index cannot reach a node's reference
+			if (currentNode.getNext() == null & index > elementNum + 1) {
+
+				System.err.println("Error: index: " + index + " is out of bounds");
+				throw new IndexOutOfBoundsException();
+
+			}
 		}
 	}
 
 	@Override
 	public T remove(int index) throws IndexOutOfBoundsException {
-		// TODO Auto-generated method stub
+
+		// Variable to check index of the current node
+		int elementNum = 0;
+		Node<T> currentNode = firstNode;
+		// returnElement stores the element that will be deleted
+		Node<T> returnElement = null;
+		
+		while (currentNode != null) {
+			elementNum++;
+			// This removes first item in the list
+			if (index == 1) {
+				returnElement = new Node<T>(firstNode.getData());
+				firstNode = firstNode.getNext();
+				return returnElement.getData();
+			}
+			// This removes last item in the list
+			if (currentNode.getNext().getNext() == null) {
+				returnElement = new Node<T>(lastNode.getData());
+				lastNode = currentNode;
+				currentNode.setNext(null);
+				return returnElement.getData();
+			}
+			// This removes any item between firstNode and lastNode
+			if (elementNum == index -1) {
+				returnElement = new Node<T>(currentNode.getNext().getData());
+				currentNode.setNext(currentNode.getNext().getNext());
+				return returnElement.getData();
+			}
+			currentNode = currentNode.getNext();
+		}
 		return null;
 	}
 
