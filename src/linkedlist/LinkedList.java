@@ -98,43 +98,58 @@ public class LinkedList<T> implements LinkedListInterface<T> {
 	@Override
 	public T remove(int index) throws IndexOutOfBoundsException {
 
-		// Variable to check index of the current node
-		int elementNum = 0;
 		Node<T> currentNode = firstNode;
-		// returnElement stores the element that will be deleted
-		Node<T> returnElement = null;
-		
+		// Length of the list
+		int listSize = 0;
+		// Count list size
 		while (currentNode != null) {
-			elementNum++;
-			// This removes first item in the list
-			if (index == 1) {
-				returnElement = new Node<T>(firstNode.getData());
-				firstNode = firstNode.getNext();
-				return returnElement.getData();
-			}
-			// This removes last item in the list
-			if (currentNode.getNext().getNext() == null) {
-				returnElement = new Node<T>(lastNode.getData());
-				lastNode = currentNode;
-				currentNode.setNext(null);
-				return returnElement.getData();
-			}
-			// This removes any item between firstNode and lastNode
-			if (elementNum == index -1) {
-				returnElement = new Node<T>(currentNode.getNext().getData());
-				currentNode.setNext(currentNode.getNext().getNext());
-				return returnElement.getData();
-			}
+			listSize++;
 			currentNode = currentNode.getNext();
+		}
+
+		if (listSize < index) {
+			System.err.println("Index: " + index + " is out of bounds");
+			
+		} else {
+			// Variable to check index of the current node
+			int elementNum = 0;
+			// Reset currentNode for reuse
+			currentNode = firstNode;
+			// returnElement stores the element that will be deleted
+			Node<T> returnElement = null;
+
+			while (currentNode != null) {
+				elementNum++;
+
+				// This removes first item in the list
+				if (index == 1) {
+					returnElement = new Node<T>(firstNode.getData());
+					firstNode = firstNode.getNext();
+					return returnElement.getData();
+				}
+				// This removes last item in the list
+				if (currentNode.getNext().getNext() == null) {
+					returnElement = new Node<T>(lastNode.getData());
+					lastNode = currentNode;
+					currentNode.setNext(null);
+					return returnElement.getData();
+				}
+				// This removes any item between firstNode and lastNode
+				if (elementNum == index - 1) {
+					returnElement = new Node<T>(currentNode.getNext().getData());
+					currentNode.setNext(currentNode.getNext().getNext());
+					return returnElement.getData();
+				}
+				currentNode = currentNode.getNext();
+			}
+			return null;
 		}
 		return null;
 	}
 
 	@Override
 	public void print() {
-
 		if (isEmpty()) {
-
 			System.out.println("List is empty");
 			return;
 		}
@@ -145,5 +160,26 @@ public class LinkedList<T> implements LinkedListInterface<T> {
 			System.out.println(currentNode.getData());
 			currentNode = currentNode.getNext();
 		}
+	}
+	
+	@Override
+	public String toString() {
+		String print ="[";
+		
+		if (isEmpty()) {
+			return "";
+		}
+
+		Node<T> currentNode = firstNode;
+
+		while (currentNode != null) {
+			if (currentNode.getNext() == null) {
+				print = print  + currentNode.getData() + "]";
+			} else {
+			print = print  + currentNode.getData() + ", ";
+			}
+			currentNode = currentNode.getNext();
+		}
+		return print;
 	}
 }

@@ -40,7 +40,6 @@ public class LinkedListTest {
 
 		list.addLast("Jimmy");
 		list.addLast("Galvan");
-//		list.print();
 
 		assertEquals(5, list.size());
 	}
@@ -146,7 +145,7 @@ public class LinkedListTest {
 		list.addLast("Yenna");
 		list.addLast("Maria");
 		list.addLast("Will");
-
+		
 	}
 
 }
